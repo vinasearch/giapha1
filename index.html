@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sơ Đồ Phả Hệ - Nội Tộc Họ Nguyễn Tống</title>
+  
+  <!-- Nhập Google Fonts: Playfair Display cho Tiêu đề, Be Vietnam Pro cho nội dung chữ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- HỆ THỐNG THIẾT KẾ & ĐỒNG BỘ MÀU SẮC (THEME) --- */
+    :root {
+      --primary-color: #8c1d1d;       /* Đỏ đô tôn nghiêm */
+      --primary-hover: #b22222;       /* Đỏ sáng hơn khi hover */
+      --secondary-color: #a37a3e;     /* Nâu đồng sang trọng */
+      --bg-cream: #faf6f0;            /* Nền giấy da cổ điển */
+      --bg-cream-dark: #f3ece0;       /* Giấy da sẫm hơn */
+      --text-dark: #3a2312;           /* Chữ màu nâu đen trầm */
+      --text-light: #6e5440;          /* Chữ màu nâu nhạt hơn */
+      --card-male-border: #abc4ff;    /* Viền xanh lam cho Nam */
+      --card-female-border: #ffd1dc;  /* Viền hồng cho Nữ */
+      --card-ancestor-border: #d5c3a6;/* Viền vàng đồng cho Thủy Tổ */
+      --shadow-sm: 0 2px 8px rgba(58, 35, 18, 0.08);
+      --shadow-md: 0 8px 24px rgba(58, 35, 18, 0.12);
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background-color: var(--bg-cream);
+      background-image: radial-gradient(circle, #fdfcf7 0%, var(--bg-cream) 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* --- KHUNG HEADER & BANNER TRUYỀN THỐNG --- */
+    header {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 20px 30px;
+      position: relative;
+      border-bottom: 5px solid var(--secondary-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-info h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .header-info p {
+      font-size: 14px;
+      color: #ffcccc;
+      font-style: italic;
+    }
+
+    /* --- NÚT CHỨC NĂNG HỆ THỐNG --- */
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+      border: none;
+      outline: none;
+    }
+
+    .btn-primary {
+      background-color: var(--secondary-color);
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary:hover {
+      background-color: #bf9251;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-accent {
+      background-color: #4a2e1b;
+      color: #fff;
+    }
+
+    .btn-accent:hover {
+      background-color: #5c3e27;
+    }
+
+    /* --- THANH ĐIỀU KHIỂN & BỘ LỌC (TOOLBAR) --- */
+    .toolbar {
+      background-color: var(--bg-cream-dark);
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(58, 35, 18, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      z-index: 9;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-input {
+      padding: 9px 12px 9px 36px;
+      border-radius: 6px;
+      border: 1px solid #d5c3a6;
+      background-color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      width: 250px;
+      color: var(--text-dark);
+      transition: var(--transition-fast);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(140, 29, 29, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .toggle-group {
+      display: flex;
+      background-color: rgba(0,0,0,0.05);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+    .toggle-item {
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 4px;
+      background: none;
+      color: var(--text-light);
+      cursor: pointer;
+      border: none;
+      transition: var(--transition-fast);
+    }
+
+    .toggle-item.active {
+      background-color: #fff;
+      color: var(--primary-color);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-weight: 600;
+    }
+
+    /* --- KHU VỰC CHÍNH (MAIN CONTAINER) --- */
+    main {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- CẤU HÌNH BÀN LÀM VIỆC SƠ ĐỒ CÂY (PAN & ZOOM CONTAINER) --- */
+    .pan-zoom-container {
+      width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 200px);
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      flex: 1;
+    }
+
+    .pan-zoom-container:active {
+      cursor: grabbing;
+    }
+
+    .pan-zoom-content {
+      position: absolute;
+      transform-origin: 0 0;
+      padding: 60px;
+      min-width: max-content;
+      min-height: max-content;
+      transition: transform 0.05s ease-out; /* Phản hồi nhanh khi kéo thả */
+    }
+
+    /* --- BỘ ĐIỀU KHIỂN THU PHÓNG (ZOOM CONTROLS) --- */
+    .zoom-controls {
+      position: absolute;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 8;
+    }
+
+    .zoom-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 1px solid rgba(58, 35, 18, 0.15);
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      transition: var(--transition-fast);
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .zoom-btn:hover {
+      background-color: var(--bg-cream-dark);
+      color: var(--primary-color);
+      transform: scale(1.05);
+    }
+
+    /* --- CẤU TRÚC VẼ CÂY GIA PHẢ BẰNG CSS (TREE LAYOUT) --- */
+    .tree ul {
+      padding-top: 40px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      transition: all 0.5s;
+    }
+
+    .tree li {
+      position: relative;
+      list-style: none;
+      padding: 40px 10px 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.5s;
+    }
+
+    /* Vẽ các nhánh kết nối dọc */
+    .tree li::before, .tree li::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 50%;
+      border-top: 2px solid var(--secondary-color);
+      width: 50%;
+      height: 40px;
+    }
+
+    .tree li::after {
+      right: auto;
+      left: 50%;
+      border-left: 2px solid var(--secondary-color);
+    }
+
+    /* Bỏ nhánh thừa của các đầu mút */
+    .tree li:only-child::after, .tree li:only-child::before {
+      display: none;
+    }
+
+    .tree li:only-child {
+      padding-top: 0;
+    }
+
+    .tree li:first-child::before, .tree li:last-child::after {
+      border: 0 none;
+    }
+
+    .tree li:last-child::before {
+      border-right: 2px solid var(--secondary-color);
+      border-radius: 0 8px 0 0;
+    }
+
+    .tree li:first-child::after {
+      border-radius: 8px 0 0 0;
+    }
+
+    /* Đường kết nối đi từ nút cha xuống dòng con */
+    .tree ul::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      border-left: 2px solid var(--secondary-color);
+      width: 0;
+      height: 40px;
+    }
+
+    /* --- SƠ ĐỒ CÂY DẠNG NGANG (HORIZONTAL TREE) --- */
+    .tree.horizontal ul {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 0;
+      padding-left: 45px;
+      gap: 15px;
+    }
+
+    .tree.horizontal ul::before {
+      top: 50%;
+      left: 0;
+      width: 45px;
+      height: 0;
+      border-left: 0;
+      border-top: 2px solid var(--secondary-color);
+    }
+
+    .tree.horizontal li {
+      flex-direction: row;
+      align-items: center;
+      padding: 10px 0 10px 45px;
+    }
+
+    .tree.horizontal li::before, .tree.horizontal li::after {
+      top: 0;
+      left: 0;
+      right: auto;
+      border-top: 0;
+      border-left: 2px solid var(--secondary-color);
+      width: 45px;
+      height: 50%;
+    }
+
+    .tree.horizontal li::after {
+      top: 50%;
+      border-top: 2px solid var(--secondary-color);
+    }
+
+    .tree.horizontal li:first-child::before, .tree.horizontal li:last-child::after {
+      border: 0 none;
+    }
+
+    .tree.horizontal li:last-child::before {
+      border-bottom: 2px solid var(--secondary-color);
+      border-radius: 0 0 0 8px;
+    }
+
+    .tree.horizontal li:first-child::after {
+      border-radius: 8px 0 0 0;
+    }
+
+    .tree.horizontal li:only-child {
+      padding-left: 0;
+    }
+
+    .tree.horizontal li:only-child::before, .tree.horizontal li:only-child::after {
+      display: none;
+    }
+
+    /* --- THIẾT KẾ THẺ THÀNH VIÊN (NODE CARD) --- */
+    .node-group {
+      display: flex;
+      align-items: stretch;
+      background-color: #ffffff;
+      border: 1.5px solid var(--card-ancestor-border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      max-width: 320px;
+      transition: var(--transition-normal);
+      z-index: 2;
+    }
+
+    .node-group:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(58, 35, 18, 0.15);
+      border-color: var(--primary-color);
+    }
+
+    /* Highlight tìm kiếm */
+    .node-group.highlighted {
+      animation: pulse-border 1.5s infinite alternate;
+      box-shadow: 0 0 15px rgba(140, 29, 29, 0.6);
+      transform: scale(1.05);
+      border-color: var(--primary-color);
+    }
+
+    @keyframes pulse-border {
+      0% { border-color: var(--secondary-color); }
+      100% { border-color: var(--primary-color); }
+    }
+
+    /* Thẻ thành viên chính */
+    .node-card {
+      padding: 12px 16px;
+      min-width: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .node-card.male {
+      background-image: linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%);
+      border-left: 4px solid var(--card-male-border);
+    }
+
+    .node-card.female {
+      background-image: linear-gradient(180deg, #ffffff 0%, #fdf5f7 100%);
+      border-left: 4px solid var(--card-female-border);
+    }
+
+    .node-card.ancestor {
+      background-image: linear-gradient(180deg, #fffbf2 0%, #f9f1e1 100%);
+      border-left: 4px solid var(--secondary-color);
+    }
+
+    /* Thành viên đã khuất */
+    .node-card.deceased {
+      background-color: #f5f5f5;
+      background-image: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+      opacity: 0.85;
+    }
+
+    .node-card.deceased .card-name {
+      color: #555;
+      text-decoration: line-through;
+    }
+
+    .node-card.deceased::before {
+      content: '⛪';
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 10px;
+      opacity: 0.6;
+    }
+
+    /* Thông tin nội bộ thẻ */
+    .gen-badge {
+      align-self: flex-start;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background-color: var(--secondary-color);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .node-card.male .gen-badge {
+      background-color: #6488e3;
+    }
+
+    .node-card.female .gen-badge {
+      background-color: #e36488;
+    }
+
+    .node-card.ancestor .gen-badge {
+      background-color: var(--primary-color);
+    }
+
+    .card-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 3px;
+      color: var(--text-dark);
+    }
+
+    .card-title {
+      font-size: 12px;
+      color: var(--text-light);
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-role {
+      font-size: 10px;
+      background-color: rgba(58, 35, 18, 0.06);
+      color: var(--text-light);
+      align-self: flex-start;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    /* Mối liên kết Vợ / Chồng trong thẻ ghép */
+    .spouse-divider {
+      width: 1px;
+      background-color: #e5dec9;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spouse-divider::before {
+      content: '💍';
+      font-size: 11px;
+      background-color: #fff;
+      padding: 2px;
+      border-radius: 50%;
+      border: 1px solid #e5dec9;
+      position: absolute;
+    }
+
+    /* --- DANH SÁCH LỒNG NHAU CHO MOBILE/TABLET (COLLAPSIBLE LIST) --- */
+    .list-view-container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+      width: 100%;
+      display: none; /* Mặc định ẩn, bật lên khi chọn chế độ */
+    }
+
+    .list-root-ul {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      border: 1.5px solid var(--card-ancestor-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .list-view-container ul {
+      list-style-type: none;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .list-view-container ul::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      border-left: 1px dashed rgba(58, 35, 18, 0.2);
+    }
+
+    .list-item-li {
+      margin: 10px 0;
+      position: relative;
+    }
+
+    .list-item-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      background-color: var(--bg-cream-dark);
+      border: 1px solid rgba(58, 35, 18, 0.05);
+      transition: var(--transition-fast);
+      position: relative;
+    }
+
+    .list-item-content:hover {
+      background-color: #fcf9f2;
+      border-color: var(--secondary-color);
+    }
+
+    .list-item-content.highlighted {
+      background-color: #fff4d4;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px rgba(140, 29, 29, 0.2);
+    }
+
+    .toggle-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background-color: rgba(58, 35, 18, 0.08);
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: var(--transition-fast);
+    }
+
+    .toggle-btn:hover {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+
+    .toggle-btn.collapsed {
+      transform: rotate(0deg);
+    }
+
+    .toggle-spacer {
+      width: 20px;
+      display: inline-block;
+    }
+
+    .list-gender-icon {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .list-gender-icon.male {
+      background-color: var(--card-male-border);
+      border: 1.5px solid #6488e3;
+    }
+
+    .list-gender-icon.female {
+      background-color: var(--card-female-border);
+      border: 1.5px solid #e36488;
+    }
+
+    .list-item-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      flex-wrap: wrap;
+    }
+
+    .list-name {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .list-title {
+      font-size: 13px;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .list-gen-badge {
+      font-size: 9px;
+      background-color: var(--secondary-color);
+      color: #fff;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .list-role-badge {
+      font-size: 10px;
+      background-color: rgba(58, 35, 18, 0.06);
+      color: var(--text-light);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .list-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .list-btn {
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      background-color: #fff;
+      border: 1px solid rgba(58, 35, 18, 0.15);
+      color: var(--text-light);
+    }
+
+    .list-btn:hover {
+      background-color: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* --- CỦA SỔ CHI TIẾT / FORM NHẬP LIỆU (MODAL POPUP) --- */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(44, 26, 14, 0.5); /* Tông nâu mờ */
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 3px solid var(--secondary-color);
+      box-shadow: var(--shadow-md);
+      transform: scale(0.9);
+      transition: transform var(--transition-normal);
+    }
+
+    .modal-backdrop.open .modal-container {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+
+    .modal-header h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: var(--transition-fast);
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      opacity: 1;
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    /* --- CẤU TRÚC FORM CHI TIẾT --- */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1.5px solid #d5c3a6;
+      background-color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-dark);
+      transition: var(--transition-fast);
+    }
+
+    input[type="text"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(140, 29, 29, 0.1);
+    }
+
+    /* Checkbox & radio */
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    /* --- HIỂN THỊ CHI TIẾT THÀNH VIÊN (VIEW DETAIL MODE) --- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 12px 20px;
+      margin-bottom: 24px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text-dark);
+    }
+
+    .info-notes {
+      grid-column: 1 / span 2;
+      background-color: var(--bg-cream-dark);
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid rgba(58, 35, 18, 0.08);
+      margin-top: 10px;
+    }
+
+    .info-notes h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .info-notes p {
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    /* Nhánh Vợ/Chồng trong chi tiết */
+    .spouse-list-section {
+      border-top: 1px dashed rgba(58, 35, 18, 0.15);
+      margin-top: 15px;
+      padding-top: 15px;
+    }
+
+    .spouse-list-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .spouse-item-edit {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      background-color: rgba(58, 35, 18, 0.04);
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    /* --- NÚT HÀNH ĐỘNG DƯỚI MODAL --- */
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(58, 35, 18, 0.1);
+      padding-top: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-left, .footer-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Cảnh báo xóa */
+    .delete-warning-text {
+      color: #c92a2a;
+      font-size: 13px;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    /* --- POP-UP HƯỚNG DẪN SỬ DỤNG (USER GUIDE) --- */
+    .guide-modal-container {
+      max-width: 650px;
+    }
+
+    .guide-step {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .guide-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .guide-text h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--primary-color);
+    }
+
+    .guide-text p {
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: var(--text-light);
+    }
+
+    /* --- THIẾT KẾ ĐÁP ỨNG CHO MOBILE/TABLET (RESPONSIVE) --- */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px;
+      }
+      .header-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .header-info {
+        text-align: center;
+      }
+      .header-actions {
+        justify-content: center;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 10px;
+      }
+      .toolbar-left, .toolbar-right {
+        justify-content: space-between;
+        width: 100%;
+      }
+      .search-wrapper {
+        flex: 1;
+      }
+      .search-input {
+        width: 100%;
+      }
+      /* Gợi ý cho thiết bị di động */
+      .mobile-suggest-tip {
+        background-color: #fff9db;
+        border: 1px solid #ffd8a8;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        margin: 10px;
+        display: block;
+        text-align: center;
+        color: #e67e22;
+      }
+      /* Thẻ thành viên nhỏ lại chút trên mobile để đỡ chật */
+      .node-group {
+        max-width: 260px;
+      }
+      .node-card {
+        padding: 8px 12px;
+        min-width: 110px;
+      }
+      .card-name {
+        font-size: 13px;
+      }
+      .card-title {
+        font-size: 10px;
+      }
+      .modal-container {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER TIÊU ĐỀ TRUYỀN THỐNG -->
+  <header>
+    <div class="header-container">
+      <div class="header-info">
+        <h1>Sơ Đồ Phả Hệ - Nội Tộc Họ Nguyễn Tống</h1>
+        <p>Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-primary" onclick="openGuideModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          Hướng Dẫn Điền
+        </button>
+        <button class="btn-secondary" onclick="exportDataJSON()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Xuất JSON
+        </button>
+        <button class="btn-secondary" onclick="triggerImport()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          Nhập JSON
+        </button>
+        <input type="file" id="import-file-input" class="hidden" accept=".json" onchange="importDataJSON(event)">
+        <button class="btn-accent" onclick="resetToDefaultData()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6"></path><path d="M3 13a9 9 0 1 0 3-7.7L3 8"></path></svg>
+          Khởi Tạo Lại
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- THANH ĐIỀU KHIỂN & TÌM KIẾM / LỌC -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <!-- Bộ lọc hiển thị: Cây Dọc, Cây Ngang, Danh sách -->
+      <div class="toggle-group">
+        <button class="toggle-item active" id="view-tree-vert-btn" onclick="setViewMode('tree-vertical')">🌿 Cây dọc</button>
+        <button class="toggle-item" id="view-tree-hori-btn" onclick="setViewMode('tree-horizontal')">🪵 Cây ngang</button>
+        <button class="toggle-item" id="view-list-btn" onclick="setViewMode('list')">📋 Danh sách</button>
+      </div>
+    </div>
+    
+    <div class="toolbar-right">
+      <!-- Ô Tìm Kiếm -->
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="search-input" id="search-member-input" placeholder="Tìm tên cụ, đời thứ, vai vế..." oninput="handleSearch(this.value)">
+      </div>
+      <!-- Lọc Đời nhanh -->
+      <select id="filter-gen-select" style="width: auto; padding: 8px 10px;" onchange="handleFilterGen(this.value)">
+        <option value="">-- Mọi thế hệ --</option>
+        <option value="1">Đời thứ 1 (Thủy Tổ)</option>
+        <option value="2">Đời thứ 2</option>
+        <option value="3">Đời thứ 3</option>
+        <option value="4">Đời thứ 4</option>
+        <option value="5">Đời thứ 5</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- GỢI Ý CHO MOBILE (CHỈ XUẤT HIỆN TRÊN MÀN HÌNH NHỎ) -->
+  <div class="mobile-suggest-tip" style="display: none;" id="mobile-suggest-el">
+    💡 Điện thoại nên dùng chế độ <strong>📋 Danh sách</strong> để dễ thao tác và đọc sơ đồ hơn.
+  </div>
+
+  <!-- PHẦN HIỂN THỊ CHÍNH -->
+  <main>
+    
+    <!-- CHẾ ĐỘ 1: SƠ ĐỒ CÂY (TREE VIEW) -->
+    <div class="pan-zoom-container" id="tree-container-wrapper">
+      <div class="pan-zoom-content tree" id="tree-view-content">
+        <!-- Chèn cây gia phả động ở đây -->
+      </div>
+      
+      <!-- Bộ điều khiển zoom góc màn hình -->
+      <div class="zoom-controls">
+        <button class="zoom-btn" onclick="adjustZoom(0.1)" title="Phóng to">＋</button>
+        <button class="zoom-btn" onclick="adjustZoom(-0.1)" title="Thu nhỏ">－</button>
+        <button class="zoom-btn" onclick="resetZoomAndPan()" title="Căn giữa">🎯</button>
+      </div>
+    </div>
+
+    <!-- CHẾ ĐỘ 2: DANH SÁCH LỒNG NHAU (COLLAPSIBLE LIST VIEW) -->
+    <div class="list-view-container" id="list-container-wrapper">
+      <div class="list-root-ul" id="list-view-content">
+        <!-- Chèn danh sách lồng nhau ở đây -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======================== CÁC MODAL HỆ THỐNG ======================== -->
+
+  <!-- 1. MODAL CHI TIẾT THÀNH VIÊN (VIEW / EDIT / ADD RELATIVE) -->
+  <div class="modal-backdrop" id="member-modal-backdrop" onclick="closeMemberModal()">
+    <div class="modal-container" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="member-modal-title">Thông Tin Thành Viên</h3>
+        <button class="modal-close" onclick="closeMemberModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- TRẠNG THÁI 1: XEM CHI TIẾT -->
+        <div id="modal-view-mode">
+          <div class="info-grid">
+            <span class="info-label">Họ và tên:</span>
+            <span class="info-value" id="view-name" style="font-weight: bold; font-size: 16px;"></span>
+
+            <span class="info-label">Tên hiệu:</span>
+            <span class="info-value" id="view-title"></span>
+
+            <span class="info-label">Giới tính:</span>
+            <span class="info-value" id="view-gender"></span>
+
+            <span class="info-label">Đời thứ:</span>
+            <span class="info-value" id="view-generation"></span>
+
+            <span class="info-label">Vai vế:</span>
+            <span class="info-value" id="view-role"></span>
+
+            <span class="info-label">Sinh/Mất:</span>
+            <span class="info-value" id="view-years"></span>
+
+            <span class="info-label">Nguyên quán:</span>
+            <span class="info-value" id="view-origin"></span>
+          </div>
+
+          <!-- Nhánh thông tin Vợ/Chồng -->
+          <div class="spouse-list-section" id="view-spouse-section">
+            <div class="spouse-list-title">Vợ / Chồng</div>
+            <div id="view-spouse-list">
+              <!-- Render vợ chồng ở đây -->
+            </div>
+          </div>
+
+          <!-- Ghi chú / Tiểu sử -->
+          <div class="info-notes">
+            <h4>Tiểu Sử & Ghi Chú</h4>
+            <p id="view-notes">Chưa có ghi chú tiểu sử.</p>
+          </div>
+
+          <!-- Các nút hành động liên quan -->
+          <div class="modal-footer">
+            <div class="footer-left">
+              <button class="btn-accent" onclick="switchToEditMode()">✏️ Sửa thông tin</button>
+            </div>
+            <div class="footer-right">
+              <button class="btn-primary" onclick="openAddRelativeDropdown()">➕ Thêm người thân</button>
+            </div>
+          </div>
+
+          <!-- Khối nút thêm người thân ẩn hiện -->
+          <div id="add-relative-actions-box" class="hidden" style="margin-top: 15px; background-color: var(--bg-cream-dark); padding: 15px; border-radius: 6px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <button class="list-btn" onclick="startAddRelative('parent')">👴 Thêm Cha/Mẹ</button>
+            <button class="list-btn" onclick="startAddRelative('spouse')">💍 Thêm Vợ/Chồng</button>
+            <button class="list-btn" onclick="startAddRelative('sibling')">👦 Thêm Anh/Chị/Em</button>
+            <button class="list-btn" onclick="startAddRelative('child')">👶 Thêm Con</button>
+          </div>
+        </div>
+
+        <!-- TRẠNG THÁI 2: FORM NHẬP / CHỈNH SỬA / THÊM MỚI -->
+        <form id="member-form" class="hidden" onsubmit="handleFormSubmit(event)">
+          <input type="hidden" id="form-node-id">
+          <input type="hidden" id="form-action-type"> <!-- 'edit' hoặc 'add_relative' -->
+          <input type="hidden" id="form-relation-type"> <!-- 'parent', 'spouse', 'sibling', 'child' -->
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-name">Họ và tên *</label>
+              <input type="text" id="form-name" required placeholder="Ví dụ: CỤ QUYỀN">
+            </div>
+            <div class="form-group">
+              <label for="form-title">Tên hiệu / Bí danh</label>
+              <input type="text" id="form-title" placeholder="Ví dụ: Hiệu Diệu Tý">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-gender">Giới tính</label>
+              <select id="form-gender">
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="form-generation">Đời thứ *</label>
+              <input type="text" id="form-generation" required pattern="[0-9]+" placeholder="Số nguyên dương">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-role">Vai vế</label>
+              <input type="text" id="form-role" placeholder="Ví dụ: Cành Trưởng, Con trưởng, Con thứ...">
+            </div>
+            <div class="form-group">
+              <label for="form-origin">Nguyên quán</label>
+              <input type="text" id="form-origin" value="Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-birth">Năm sinh</label>
+              <input type="text" id="form-birth" placeholder="Ví dụ: 1940">
+            </div>
+            <div class="form-group">
+              <label for="form-death">Năm mất (để trống nếu còn sống)</label>
+              <input type="text" id="form-death" placeholder="Ví dụ: 2015">
+            </div>
+          </div>
+
+          <!-- Section Vợ/Chồng khi Sửa (Edit) -->
+          <div class="spouse-list-section hidden" id="form-spouses-section">
+            <div class="spouse-list-title">Danh sách Vợ / Chồng</div>
+            <div id="form-spouses-list-container">
+              <!-- Render input vợ chồng ở đây -->
+            </div>
+            <button type="button" class="list-btn" onclick="addNewSpouseInput()" style="margin-top: 8px;">＋ Thêm Vợ/Chồng mới</button>
+          </div>
+
+          <div class="form-group">
+            <label for="form-notes">Tiểu sử / Đóng góp / Ghi nhớ dòng họ</label>
+            <textarea id="form-notes" rows="4" placeholder="Nhập câu chuyện đời, kỷ niệm hoặc lời nhắn nhủ của người đó..."></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <div class="footer-left">
+              <!-- Nút xóa chỉ hiển thị khi sửa thành viên hiện hữu -->
+              <button type="button" class="btn-secondary" id="form-delete-btn" onclick="handleDeleteMember()" style="background-color: #ffe3e3; color: #c92a2a; border-color: #ffc9c9;">🗑️ Xóa</button>
+            </div>
+            <div class="footer-right">
+              <button type="button" class="btn-secondary" onclick="cancelForm()">Hủy</button>
+              <button type="submit" class="btn-primary">💾 Lưu Lại</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. HỘP THOẠI XÁC NHẬN XÓA (CONFIRM DELETE MODAL) -->
+  <div class="modal-backdrop" id="delete-modal-backdrop" onclick="closeDeleteModal()">
+    <div class="modal-container" onclick="event.stopPropagation()" style="max-width: 450px; border-color: #c92a2a;">
+      <div class="modal-header" style="background-color: #c92a2a;">
+        <h3>⚠️ Cảnh Báo Xóa Thành Viên</h3>
+        <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 15px; font-weight: 500;" id="delete-modal-question">Bạn có chắc chắn muốn xóa thành viên này không?</p>
+        <p class="delete-warning-text">Hành động xóa có thể ảnh hưởng đến kết nối phả hệ của dòng họ.</p>
+        
+        <div id="delete-options-container">
+          <!-- Các phương án xóa: Chỉ xóa người đó hay xóa toàn nhánh -->
+          <label class="checkbox-group" style="padding: 10px; background: #fff5f5; border-radius: 6px; border: 1px solid #ffe3e3;">
+            <input type="radio" name="delete-strategy" value="soft" checked>
+            <div>
+              <strong>Chỉ xóa người này</strong>
+              <div style="font-size:11px; color:#888;">Các thế hệ con sẽ tự động được nối trực tiếp lên cha mẹ của người bị xóa.</div>
+            </div>
+          </label>
+          <label class="checkbox-group" style="padding: 10px; background: #fff5f5; border-radius: 6px; border: 1px solid #ffe3e3; margin-top: 10px;">
+            <input type="radio" name="delete-strategy" value="hard">
+            <div>
+              <strong>Xóa toàn bộ nhánh con cháu</strong>
+              <div style="font-size:11px; color:#888;">Xóa vĩnh viễn người này cùng toàn bộ các thế hệ con, cháu, chắt... phía sau.</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="modal-footer" style="margin-top: 20px; padding-top: 15px;">
+          <button class="btn-secondary" onclick="closeDeleteModal()">Hủy</button>
+          <button class="btn-primary" style="background-color: #c92a2a;" onclick="confirmDeleteMember()">Đồng Ý Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MODAL HƯỚNG DẪN SỬ DỤNG (USER GUIDE POPUP) -->
+  <div class="modal-backdrop" id="guide-modal-backdrop" onclick="closeGuideModal()">
+    <div class="modal-container guide-modal-container" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>📖 Hướng Dẫn Sử Dụng Gia Phả Số</h3>
+        <button class="modal-close" onclick="closeGuideModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="guide-step">
+          <div class="guide-num">1</div>
+          <div class="guide-text">
+            <h4>Xem và Di chuyển sơ đồ</h4>
+            <p><strong>Trên Máy tính (PC):</strong> Giữ chuột trái vào khoảng không và kéo thả để di chuyển. Sử dụng con lăn chuột để phóng to/thu nhỏ sơ đồ phả hệ.<br><strong>Trên Điện thoại/Máy tính bảng:</strong> Dùng ngón tay vuốt để di chuyển phả hệ, nhéo hai ngón tay để thu phóng. Hoặc bạn nên chuyển sang chế độ <strong>"Danh sách"</strong> để hiển thị gọn gàng.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-num">2</div>
+          <div class="guide-text">
+            <h4>Tra cứu và Lọc thành viên</h4>
+            <p>Sử dụng ô <strong>"Tìm kiếm"</strong> để tìm theo Họ tên, vai vế. Khi khớp, thẻ sẽ nhấp nháy vàng. Trên sơ đồ cây, hệ thống sẽ tự động đưa thành viên đó về giữa màn hình. Bạn cũng có thể dùng bộ lọc đời để làm nổi bật thế hệ.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-num">3</div>
+          <div class="guide-text">
+            <h4>Chỉnh sửa & Thêm mới người thân</h4>
+            <p>Bấm trực tiếp vào bất kỳ thẻ cụ nào trên sơ đồ. Một bảng thông tin chi tiết sẽ mở ra. Bấm nút <strong>"Sửa thông tin"</strong> để thay đổi, hoặc bấm <strong>"Thêm người thân"</strong> rồi chọn Thêm Cha/Mẹ, Anh/Chị/Em, Vợ/Chồng hoặc Con cho cụ đó.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-num">4</div>
+          <div class="guide-text">
+            <h4>Xuất, Nhập và Lưu trữ dữ liệu</h4>
+            <p>Mọi thay đổi của bạn đều được <strong>tự động lưu</strong> trên trình duyệt của máy bạn (localStorage). Sau khi chỉnh sửa xong, hãy bấm <strong>"Xuất JSON"</strong> để lưu lại file dữ liệu. Những thành viên khác có thể tải file này lên bằng nút <strong>"Nhập JSON"</strong> để cùng xem và cập nhật tiếp.</p>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+          <button class="btn-primary" onclick="closeGuideModal()">Tôi Đã Hiểu</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================== MÃ NGUỒN XỬ LÝ SỰ KIỆN (JAVASCRIPT) ======================== -->
+  <script>
+    // --- KHAI BÁO DỮ LIỆU PHẢ HỆ KHỞI ĐẦU 3 ĐỜI HỌ NGUYỄN TỐNG ---
+    const defaultFamilyData = [
+      { 
+        id: "1", 
+        name: "BỐ", 
+        title: "Nhấp để đổi tên", 
+        gender: "male", 
+        birth: "", 
+        death: "", 
+        generation: 1, 
+        role: "Cha / Ông nội / Ông ngoại", 
+        origin: "Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh", 
+        notes: "Bấm vào đây để thay đổi thông tin của Bố và Mẹ.", 
+        parentId: null, 
+        spouses: [
+          { name: "MẸ", birth: "", death: "", notes: "Bấm vào Bố rồi chọn Sửa thông tin để đổi tên Mẹ." }
+        ] 
+      },
+      { 
+        id: "2", 
+        name: "CON TRƯỞNG", 
+        title: "Nhấp để đổi tên", 
+        gender: "male", 
+        birth: "", 
+        death: "", 
+        generation: 2, 
+        role: "Con trưởng", 
+        origin: "Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh", 
+        notes: "Bấm vào để đổi tên hoặc thêm Vợ/Chồng, Con.", 
+        parentId: "1", 
+        spouses: [] 
+      },
+      { 
+        id: "3", 
+        name: "CON THỨ", 
+        title: "Nhấp để đổi tên", 
+        gender: "female", 
+        birth: "", 
+        death: "", 
+        generation: 2, 
+        role: "Con thứ", 
+        origin: "Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh", 
+        notes: "Bấm vào để đổi tên hoặc thêm Chồng, Con.", 
+        parentId: "1", 
+        spouses: [] 
+      },
+      { 
+        id: "4", 
+        name: "CHÁU 1", 
+        title: "Con của Con Trưởng", 
+        gender: "male", 
+        birth: "", 
+        death: "", 
+        generation: 3, 
+        role: "Cháu nội", 
+        origin: "Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh", 
+        notes: "Thế hệ thứ 3.", 
+        parentId: "2", 
+        spouses: [] 
+      },
+      { 
+        id: "5", 
+        name: "CHÁU 2", 
+        title: "Con của Con Thứ", 
+        gender: "female", 
+        birth: "", 
+        death: "", 
+        generation: 3, 
+        role: "Cháu ngoại", 
+        origin: "Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh", 
+        notes: "Thế hệ thứ 3.", 
+        parentId: "3", 
+        spouses: [] 
+      }
+    ];
+
+    // --- BIẾN TRẠNG THÁI TOÀN CỤC (GLOBAL STATE) ---
+    let familyData = [];
+    let viewMode = 'tree-vertical'; // 'tree-vertical', 'tree-horizontal', 'list'
+    let currentSearchQuery = '';
+    let currentFilterGen = '';
+    
+    // Bản đồ dữ liệu dạng khóa-giá trị hỗ trợ truy cập O(1)
+    let nodesMap = {};
+    let childrenMap = {};
+
+    // --- CẤU HÌNH THU PHÓNG & KÉO THẢ (PAN & ZOOM CONFIG) ---
+    let scale = 1.0;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    // --- KHỞI CHẠY KHÔNG GIAN LÀM VIỆC ---
+    window.addEventListener('DOMContentLoaded', () => {
+      loadData();
+      initPanZoomEvents();
+      checkMobileSuggest();
+      window.addEventListener('resize', checkMobileSuggest);
+    });
+
+    // --- KIỂM TRA MÀN HÌNH DI ĐỘNG ---
+    function checkMobileSuggest() {
+      const suggestEl = document.getElementById('mobile-suggest-el');
+      if (window.innerWidth <= 768) {
+        suggestEl.style.display = 'block';
+      } else {
+        suggestEl.style.display = 'none';
+      }
+    }
+
+    // --- TẢI / LƯU TRỮ DỮ LIỆU (LOCAL STORAGE) ---
+    function loadData() {
+      const saved = localStorage.getItem('giapha_nguyen_toc_data');
+      if (saved) {
+        try {
+          familyData = JSON.parse(saved);
+        } catch (e) {
+          console.error("Lỗi đọc LocalStorage. Khôi phục mặc định.", e);
+          familyData = [...defaultFamilyData];
+        }
+      } else {
+        familyData = [...defaultFamilyData];
+      }
+      buildDataMaps();
+      renderAll();
+      setTimeout(resetZoomAndPan, 200); // Tự động căn giữa cây phả hệ sau khi dựng hình
+    }
+
+    function saveData() {
+      localStorage.setItem('giapha_nguyen_toc_data', JSON.stringify(familyData));
+      buildDataMaps();
+      renderAll();
+    }
+
+    function resetToDefaultData() {
+      if (confirm("⚠️ Bạn có chắc muốn khôi phục dữ liệu mẫu gốc từ PDF? Toàn bộ các thông tin mới điền sẽ bị thay thế!")) {
+        familyData = JSON.parse(JSON.stringify(defaultFamilyData));
+        saveData();
+        resetZoomAndPan();
+      }
+    }
+
+    // --- XÂY DỰNG BẢN ĐỒ PHỤ CẬN (MAPPING RELATIONS) ---
+    function buildDataMaps() {
+      nodesMap = {};
+      childrenMap = {};
+      
+      familyData.forEach(node => {
+        nodesMap[node.id] = node;
+        if (!childrenMap[node.id]) {
+          childrenMap[node.id] = [];
+        }
+      });
+
+      familyData.forEach(node => {
+        if (node.parentId && nodesMap[node.parentId]) {
+          if (!childrenMap[node.parentId]) {
+            childrenMap[node.parentId] = [];
+          }
+          // Đảm bảo không trùng lặp con
+          if (!childrenMap[node.parentId].some(c => c.id === node.id)) {
+            childrenMap[node.parentId].push(node);
+          }
+        }
+      });
+    }
+
+    // --- RENDER DỮ LIỆU LÊN GIAO DIỆN (RENDER VIEWS) ---
+    function renderAll() {
+      if (viewMode === 'tree-vertical' || viewMode === 'tree-horizontal') {
+        renderTreeView();
+      } else {
+        renderListView();
+      }
+    }
+
+    // Render Sơ Đồ Cây (Tree View)
+    function renderTreeView() {
+      const container = document.getElementById('tree-view-content');
+      
+      // Chuyển hướng cây bằng cách thêm lớp CSS tương ứng
+      if (viewMode === 'tree-horizontal') {
+        container.className = "pan-zoom-content tree horizontal";
+      } else {
+        container.className = "pan-zoom-content tree";
+      }
+
+      const roots = familyData.filter(node => !node.parentId || !nodesMap[node.parentId]);
+      
+      if (roots.length === 0) {
+        container.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-light);">Không tìm thấy nút gốc gia phả. Hãy thêm cụ Tổ đầu tiên!</div>';
+        return;
+      }
+
+      let html = '<ul class="tree-root-ul">';
+      roots.forEach(root => {
+        html += buildTreeHTML(root.id);
+      });
+      html += '</ul>';
+      container.innerHTML = html;
+
+      // Liên kết sự kiện nhấp thẻ
+      document.querySelectorAll('.node-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const memberId = card.getAttribute('data-id');
+          openMemberDetails(memberId);
+        });
+      });
+    }
+
+    // Hàm đệ quy xây dựng HTML cho cây
+    function buildTreeHTML(nodeId) {
+      const node = nodesMap[nodeId];
+      if (!node) return '';
+
+      const children = childrenMap[nodeId] || [];
+      
+      // Kiểm tra bộ lọc đời
+      const isFilteredOut = currentFilterGen && node.generation.toString() !== currentFilterGen;
+      
+      // Tìm kiếm phù hợp
+      let isMatch = false;
+      if (currentSearchQuery) {
+        const cleanQuery = removeVietnameseTones(currentSearchQuery.toLowerCase());
+        const cleanName = removeVietnameseTones(node.name.toLowerCase());
+        const cleanTitle = removeVietnameseTones((node.title || '').toLowerCase());
+        const cleanRole = removeVietnameseTones((node.role || '').toLowerCase());
+        const genStr = `doi ${node.generation}`;
+        
+        isMatch = cleanName.includes(cleanQuery) || 
+                  cleanTitle.includes(cleanQuery) || 
+                  cleanRole.includes(cleanQuery) ||
+                  genStr.includes(cleanQuery);
+      }
+
+      const genderClass = node.gender === 'female' ? 'female' : 'male';
+      const typeClass = nodeId === "1" ? 'ancestor' : genderClass;
+      const deceasedClass = node.death ? 'deceased' : '';
+      const filterDimClass = isFilteredOut ? 'dimmed' : '';
+      
+      let html = `<li class="${filterDimClass}">`;
+      
+      // Nhóm thẻ chứa thành viên và các Vợ / Chồng của họ
+      html += `<div class="node-group ${isMatch ? 'highlighted' : ''}" data-node-id="${node.id}">`;
+      
+      // Thẻ thành viên chính
+      html += `
+        <div class="node-card ${typeClass} ${deceasedClass}" data-id="${node.id}">
+          <span class="gen-badge">Đời ${node.generation}</span>
+          <span class="card-name">${node.name}</span>
+          ${node.title ? `<span class="card-title">${node.title}</span>` : ''}
+          ${node.role ? `<span class="card-role">${node.role}</span>` : ''}
+        </div>
+      `;
+
+      // Thẻ phụ Vợ / Chồng kế bên
+      if (node.spouses && node.spouses.length > 0) {
+        node.spouses.forEach(spouse => {
+          const spouseDeceased = spouse.death ? 'deceased' : '';
+          html += `
+            <div class="spouse-divider"></div>
+            <div class="node-card female spouse ${spouseDeceased}" data-id="${node.id}">
+              <span class="gen-badge">Vợ/Chồng</span>
+              <span class="card-name">${spouse.name}</span>
+              ${spouse.birth || spouse.death ? `<span class="card-title">${spouse.birth || '?'}-${spouse.death || '?'}</span>` : ''}
+            </div>
+          `;
+        });
+      }
+
+      html += `</div>`; // Đóng node-group
+
+      // Vẽ nhánh con cháu đệ quy
+      if (children.length > 0) {
+        html += '<ul>';
+        children.forEach(child => {
+          html += buildTreeHTML(child.id);
+        });
+        html += '</ul>';
+      }
+
+      html += '</li>';
+      return html;
+    }
+
+    // Render Danh Sách Lồng Nhau (List View)
+    function renderListView() {
+      const container = document.getElementById('list-view-content');
+      const roots = familyData.filter(node => !node.parentId || !nodesMap[node.parentId]);
+
+      if (roots.length === 0) {
+        container.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-light);">Gia phả trống. Hãy khôi phục dữ liệu mẫu hoặc nhập file.</div>';
+        return;
+      }
+
+      let html = '<ul class="list-root-ul">';
+      roots.forEach(root => {
+        html += buildListHTML(root.id);
+      });
+      html += '</ul>';
+      container.innerHTML = html;
+    }
+
+    // Đệ quy dựng danh sách lồng nhau
+    function buildListHTML(nodeId) {
+      const node = nodesMap[nodeId];
+      if (!node) return '';
+
+      const children = childrenMap[nodeId] || [];
+      const hasChildren = children.length > 0;
+
+      // Tìm kiếm phù hợp
+      let isMatch = false;
+      if (currentSearchQuery) {
+        const cleanQuery = removeVietnameseTones(currentSearchQuery.toLowerCase());
+        const cleanName = removeVietnameseTones(node.name.toLowerCase());
+        const cleanTitle = removeVietnameseTones((node.title || '').toLowerCase());
+        isMatch = cleanName.includes(cleanQuery) || cleanTitle.includes(cleanQuery);
+      }
+
+      let html = `<li class="list-item-li" data-id="${node.id}">`;
+      
+      html += `
+        <div class="list-item-content ${isMatch ? 'highlighted' : ''}">
+          ${hasChildren ? `<button class="toggle-btn" onclick="toggleListNode('${node.id}', event)">▼</button>` : `<span class="toggle-spacer"></span>`}
+          <span class="list-gender-icon ${node.gender === 'female' ? 'female' : 'male'}"></span>
+          <div class="list-item-info" onclick="openMemberDetails('${node.id}')">
+            <span class="list-name">${node.name}</span>
+            ${node.title ? `<span class="list-title">(${node.title})</span>` : ''}
+            <span class="list-gen-badge">Đời ${node.generation}</span>
+            ${node.role ? `<span class="list-role-badge">${node.role}</span>` : ''}
+          </div>
+          <div class="list-actions">
+            <button class="list-btn" onclick="quickAddChild('${node.id}', event)">＋ Con</button>
+          </div>
+        </div>
+      `;
+
+      if (hasChildren) {
+        html += `<ul id="list-children-${node.id}">`;
+        children.forEach(child => {
+          html += buildListHTML(child.id);
+        });
+        html += '</ul>';
+      }
+
+      html += '</li>';
+      return html;
+    }
+
+    // Đóng/Mở nhánh con trong danh sách
+    function toggleListNode(nodeId, event) {
+      event.stopPropagation();
+      const subUl = document.getElementById(`list-children-${nodeId}`);
+      const btn = event.target;
+      if (subUl) {
+        const isHidden = subUl.style.display === 'none';
+        if (isHidden) {
+          subUl.style.display = 'block';
+          btn.innerText = '▼';
+        } else {
+          subUl.style.display = 'none';
+          btn.innerText = '▶';
+        }
+      }
+    }
+
+    // --- THAY ĐỔI CHẾ ĐỘ XEM (VIEW MODE TOGGLE) ---
+    function setViewMode(mode) {
+      viewMode = mode;
+      
+      // Cập nhật trạng thái Active trên Toolbar
+      document.getElementById('view-tree-vert-btn').classList.toggle('active', mode === 'tree-vertical');
+      document.getElementById('view-tree-hori-btn').classList.toggle('active', mode === 'tree-horizontal');
+      document.getElementById('view-list-btn').classList.toggle('active', mode === 'list');
+
+      // Ẩn hiện các container hiển thị chính
+      const treeWrapper = document.getElementById('tree-container-wrapper');
+      const listWrapper = document.getElementById('list-container-wrapper');
+
+      if (mode === 'list') {
+        treeWrapper.style.display = 'none';
+        listWrapper.style.display = 'block';
+      } else {
+        treeWrapper.style.display = 'block';
+        listWrapper.style.display = 'none';
+      }
+
+      renderAll();
+      if (mode !== 'list') {
+        resetZoomAndPan();
+      }
+    }
+
+    // --- SỰ KIỆN KÉO THẢ VÀ THU PHÓNG (PAN & ZOOM EVENTS) ---
+    function initPanZoomEvents() {
+      const container = document.getElementById('tree-container-wrapper');
+      const content = document.getElementById('tree-view-content');
+
+      // Sự kiện chuột (PC)
+      container.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.node-card') || e.target.closest('button')) return;
+        isDragging = true;
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        updateTransform();
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      // Lăn chuột zoom
+      container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoomIntensity = 0.08;
+        
+        // Vị trí chuột so với container
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Tính vị trí chuột so với tọa độ content trước khi zoom
+        const wheelX = (mouseX - panX) / scale;
+        const wheelY = (mouseY - panY) / scale;
+
+        // Cập nhật scale mới
+        if (e.deltaY < 0) {
+          scale += zoomIntensity;
+        } else {
+          scale -= zoomIntensity;
+        }
+        scale = Math.min(Math.max(0.15, scale), 3.0); // Giới hạn zoom từ 15% đến 300%
+
+        // Dịch chuyển pan để tâm zoom nằm đúng vị trí chuột
+        panX = mouseX - wheelX * scale;
+        panY = mouseY - wheelY * scale;
+
+        updateTransform();
+      }, { passive: false });
+
+      // Sự kiện chạm (Mobile/Tablet)
+      let touchStartDist = 0;
+      let isPinching = false;
+
+      container.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.node-card') || e.target.closest('button')) return;
+        
+        if (e.touches.length === 1) {
+          isDragging = true;
+          startX = e.touches[0].clientX - panX;
+          startY = e.touches[0].clientY - panY;
+        } else if (e.touches.length === 2) {
+          isPinching = true;
+          isDragging = false;
+          touchStartDist = getTouchDistance(e);
+        }
+      });
+
+      container.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches.length === 1) {
+          panX = e.touches[0].clientX - startX;
+          panY = e.touches[0].clientY - startY;
+          updateTransform();
+        } else if (isPinching && e.touches.length === 2) {
+          const currentDist = getTouchDistance(e);
+          const ratio = currentDist / touchStartDist;
+          
+          const newScale = Math.min(Math.max(0.15, scale * ratio), 3.0);
+          scale = newScale;
+          touchStartDist = currentDist; // Cập nhật khoảng cách gốc
+          updateTransform();
+        }
+      });
+
+      container.addEventListener('touchend', () => {
+        isDragging = false;
+        isPinching = false;
+      });
+    }
+
+    function getTouchDistance(e) {
+      return Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+    }
+
+    function updateTransform() {
+      const content = document.getElementById('tree-view-content');
+      content.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    }
+
+    function adjustZoom(amount) {
+      scale = Math.min(Math.max(0.15, scale + amount), 3.0);
+      updateTransform();
+    }
+
+    function resetZoomAndPan() {
+      const container = document.getElementById('tree-container-wrapper');
+      const content = document.getElementById('tree-view-content');
+      
+      const containerW = container.clientWidth;
+      const containerH = container.clientHeight;
+      const contentW = content.scrollWidth;
+      
+      scale = 0.85; // Default zoom hơi xa để thấy tổng thể
+      panX = (containerW - contentW * scale) / 2;
+      panY = 50; // Khoảng cách nhỏ từ đỉnh xuống
+      
+      // Phòng trường hợp kích thước quá nhỏ hoặc chưa hiển thị
+      if (panX < 20) panX = 40;
+      
+      updateTransform();
+    }
+
+    // --- TỰ ĐỘNG CĂN GIỮA THÀNH VIÊN ĐƯỢC TÌM THẤY (AUTO-CENTER) ---
+    function centerOnNode(nodeId) {
+      if (viewMode === 'list') {
+        const itemEl = document.querySelector(`.list-item-li[data-id="${nodeId}"]`);
+        if (itemEl) {
+          itemEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+
+      const nodeGroupEl = document.querySelector(`.node-group[data-node-id="${nodeId}"]`);
+      if (!nodeGroupEl) return;
+
+      const container = document.getElementById('tree-container-wrapper');
+      const content = document.getElementById('tree-view-content');
+
+      const containerRect = container.getBoundingClientRect();
+      const nodeRect = nodeGroupEl.getBoundingClientRect();
+      const contentRect = content.getBoundingClientRect();
+
+      // Tính vị trí gốc của node so với content (chưa nhân scale)
+      const nodeXInContent = (nodeRect.left - contentRect.left) / scale;
+      const nodeYInContent = (nodeRect.top - contentRect.top) / scale;
+      const nodeW = nodeRect.width / scale;
+      const nodeH = nodeRect.height / scale;
+
+      // Tự động thiết lập scale vừa phải để xem rõ
+      scale = 0.95;
+
+      // Tọa độ pan mới để căn nút vào chính giữa khung xem
+      panX = (containerRect.width / 2) - (nodeXInContent + nodeW / 2) * scale;
+      panY = (containerRect.height / 2) - (nodeYInContent + nodeH / 2) * scale;
+
+      updateTransform();
+    }
+
+    // --- TÌM KIẾM & BỘ LỌC (SEARCH & FILTERS) ---
+    function handleSearch(query) {
+      currentSearchQuery = query;
+      renderAll();
+      
+      if (query) {
+        // Tìm thành viên phù hợp đầu tiên và căn giữa
+        const cleanQuery = removeVietnameseTones(query.toLowerCase());
+        const match = familyData.find(node => {
+          const cleanName = removeVietnameseTones(node.name.toLowerCase());
+          const cleanTitle = removeVietnameseTones((node.title || '').toLowerCase());
+          return cleanName.includes(cleanQuery) || cleanTitle.includes(cleanQuery);
+        });
+
+        if (match) {
+          // Trì hoãn một chút để đảm bảo DOM đã render xong
+          setTimeout(() => centerOnNode(match.id), 100);
+        }
+      }
+    }
+
+    function handleFilterGen(gen) {
+      currentFilterGen = gen;
+      renderAll();
+    }
+
+    // Loại bỏ dấu tiếng Việt để tìm kiếm chính xác
+    function removeVietnameseTones(str) {
+      str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+      str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+      str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+      str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+      str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+      str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+      str = str.replace(/đ/g, "d");
+      str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+      str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+      str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+      str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+      str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+      str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+      str = str.replace(/Đ/g, "D");
+      // Loại bỏ các ký tự dấu kết hợp Unicode
+      str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "");
+      str = str.replace(/\u02C6|\u0306|\u031B/g, "");
+      return str;
+    }
+
+    // --- CỬA SỔ CHI TIẾT THÀNH VIÊN (MEMBER MODAL LOGIC) ---
+    function openMemberDetails(id) {
+      const node = nodesMap[id];
+      if (!node) return;
+
+      // Ghi nhận thành viên đang tương tác
+      window.activeMemberId = id;
+      
+      // Chuyển về trạng thái Xem (View Mode) đầu tiên
+      document.getElementById('modal-view-mode').classList.remove('hidden');
+      document.getElementById('member-form').classList.add('hidden');
+      document.getElementById('add-relative-actions-box').classList.add('hidden');
+
+      // Điền thông tin vào giao diện xem chi tiết
+      document.getElementById('view-name').innerText = node.name;
+      document.getElementById('view-title').innerText = node.title || 'Chưa rõ';
+      document.getElementById('view-gender').innerText = node.gender === 'female' ? 'Nữ' : 'Nam';
+      document.getElementById('view-generation').innerText = `Đời thứ ${node.generation}`;
+      document.getElementById('view-role').innerText = node.role || 'Thành viên dòng họ';
+      
+      const birthStr = node.birth || 'Chưa rõ';
+      const deathStr = node.death ? `Mất năm ${node.death}` : 'Còn sống';
+      document.getElementById('view-years').innerText = `${birthStr} - ${deathStr}`;
+      document.getElementById('view-origin').innerText = node.origin || 'Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh';
+      document.getElementById('view-notes').innerText = node.notes || 'Chưa có thông tin ghi chú tiểu sử lịch sử dòng họ.';
+
+      // Render danh sách vợ chồng
+      const viewSpouseSection = document.getElementById('view-spouse-section');
+      const viewSpouseList = document.getElementById('view-spouse-list');
+      
+      if (node.spouses && node.spouses.length > 0) {
+        viewSpouseSection.classList.remove('hidden');
+        let spouseHtml = '';
+        node.spouses.forEach(sp => {
+          const spYears = (sp.birth || sp.death) ? `(${sp.birth || '?'}-${sp.death || '?'})` : '';
+          spouseHtml += `<div style="font-weight: 500; font-size: 14px; margin-bottom: 5px;">👰 ${sp.name} ${spYears} ${sp.notes ? `<span style="font-size:12px; color:#888;">- ${sp.notes}</span>` : ''}</div>`;
+        });
+        viewSpouseList.innerHTML = spouseHtml;
+      } else {
+        viewSpouseSection.classList.add('hidden');
+      }
+
+      // Mở modal backdrop
+      document.getElementById('member-modal-backdrop').classList.add('open');
+    }
+
+    function closeMemberModal() {
+      document.getElementById('member-modal-backdrop').classList.remove('open');
+    }
+
+    // --- FORM CHỈNH SỬA & THÊM MỚI (EDIT / ADD RELATIVE) ---
+    function switchToEditMode() {
+      const node = nodesMap[window.activeMemberId];
+      if (!node) return;
+
+      // Ẩn xem, hiện form
+      document.getElementById('modal-view-mode').classList.add('hidden');
+      document.getElementById('member-form').classList.remove('hidden');
+      document.getElementById('form-spouses-section').classList.remove('hidden');
+
+      // Thiết lập cấu hình form
+      document.getElementById('member-modal-title').innerText = "Sửa Thông Tin Thành Viên";
+      document.getElementById('form-node-id').value = node.id;
+      document.getElementById('form-action-type').value = 'edit';
+      document.getElementById('form-delete-btn').classList.remove('hidden');
+
+      // Đưa dữ liệu cũ vào form input
+      document.getElementById('form-name').value = node.name;
+      document.getElementById('form-title').value = node.title || '';
+      document.getElementById('form-gender').value = node.gender;
+      document.getElementById('form-generation').value = node.generation;
+      document.getElementById('form-role').value = node.role || '';
+      document.getElementById('form-origin').value = node.origin || '';
+      document.getElementById('form-birth').value = node.birth || '';
+      document.getElementById('form-death').value = node.death || '';
+      document.getElementById('form-notes').value = node.notes || '';
+
+      // Tải danh sách vợ chồng để sửa đổi trực tiếp
+      renderSpouseInputs(node.spouses || []);
+    }
+
+    // Vẽ danh sách Vợ/Chồng trong form chỉnh sửa
+    function renderSpouseInputs(spouses) {
+      const container = document.getElementById('form-spouses-list-container');
+      container.innerHTML = '';
+      
+      spouses.forEach((sp, idx) => {
+        const div = document.createElement('div');
+        div.className = 'spouse-item-edit';
+        div.innerHTML = `
+          <input type="text" placeholder="Tên vợ/chồng" value="${sp.name}" required style="flex: 2;">
+          <input type="text" placeholder="Năm sinh" value="${sp.birth || ''}" style="flex: 1;">
+          <input type="text" placeholder="Năm mất" value="${sp.death || ''}" style="flex: 1;">
+          <button type="button" class="list-btn" onclick="removeSpouseInput(this)" style="color: #c92a2a; border-color:#ffc9c9;">Xóa</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function addNewSpouseInput() {
+      const container = document.getElementById('form-spouses-list-container');
+      const div = document.createElement('div');
+      div.className = 'spouse-item-edit';
+      div.innerHTML = `
+        <input type="text" placeholder="Tên vợ/chồng mới" required style="flex: 2;">
+        <input type="text" placeholder="Năm sinh" style="flex: 1;">
+        <input type="text" placeholder="Năm mất" style="flex: 1;">
+        <button type="button" class="list-btn" onclick="removeSpouseInput(this)" style="color: #c92a2a; border-color:#ffc9c9;">Xóa</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function removeSpouseInput(btn) {
+      btn.closest('.spouse-item-edit').remove();
+    }
+
+    // Hiển thị ngăn nút Thêm Quan Hệ
+    function openAddRelativeDropdown() {
+      const box = document.getElementById('add-relative-actions-box');
+      box.classList.toggle('hidden');
+    }
+
+    // Khởi tạo Form Thêm Quan Hệ Mới
+    function startAddRelative(relation) {
+      const activeNode = nodesMap[window.activeMemberId];
+      if (!activeNode) return;
+
+      // Ẩn xem, hiện form
+      document.getElementById('modal-view-mode').classList.add('hidden');
+      document.getElementById('member-form').classList.remove('hidden');
+      document.getElementById('form-spouses-section').classList.add('hidden'); // Quan hệ mới không tự lồng thêm vợ chồng ngay lập tức
+
+      // Đặt tiêu đề
+      let relationText = "";
+      let targetGen = activeNode.generation;
+
+      if (relation === 'parent') {
+        relationText = "Cha / Mẹ";
+        targetGen = activeNode.generation > 1 ? activeNode.generation - 1 : 1;
+        
+        // Kiểm tra xem đã có cha mẹ chưa
+        if (activeNode.parentId && nodesMap[activeNode.parentId]) {
+          alert(`Thông báo: Cụ ${activeNode.name} đã được liên kết với Cha/Mẹ là ${nodesMap[activeNode.parentId].name}. Bạn hãy chỉnh sửa hoặc thêm anh/chị/em.`);
+          cancelForm();
+          return;
+        }
+      } else if (relation === 'spouse') {
+        relationText = "Vợ / Chồng";
+      } else if (relation === 'sibling') {
+        relationText = "Anh / Chị / Em";
+        targetGen = activeNode.generation;
+      } else if (relation === 'child') {
+        relationText = "Con";
+        targetGen = activeNode.generation + 1;
+      }
+
+      document.getElementById('member-modal-title').innerText = `Thêm ${relationText} của cụ ${activeNode.name}`;
+      
+      // Reset form trống để điền mới
+      document.getElementById('form-node-id').value = activeNode.id;
+      document.getElementById('form-action-type').value = 'add_relative';
+      document.getElementById('form-relation-type').value = relation;
+      document.getElementById('form-delete-btn').classList.add('hidden'); // Thêm mới không cần nút Xóa
+
+      document.getElementById('form-name').value = '';
+      document.getElementById('form-title').value = '';
+      document.getElementById('form-gender').value = relation === 'spouse' ? (activeNode.gender === 'male' ? 'female' : 'male') : 'male';
+      document.getElementById('form-generation').value = targetGen;
+      document.getElementById('form-role').value = relation === 'child' ? 'Con thứ' : '';
+      document.getElementById('form-origin').value = activeNode.origin || 'Nghi Khúc, An Bình, Thuận Thành, Bắc Ninh';
+      document.getElementById('form-birth').value = '';
+      document.getElementById('form-death').value = '';
+      document.getElementById('form-notes').value = '';
+    }
+
+    // Nút tắt hủy form
+    function cancelForm() {
+      if (document.getElementById('form-action-type').value === 'edit') {
+        openMemberDetails(window.activeMemberId);
+      } else {
+        closeMemberModal();
+      }
+    }
+
+    // XỬ LÝ LƯU FORM (SUBMIT FORM)
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      const nodeId = document.getElementById('form-node-id').value;
+      const actionType = document.getElementById('form-action-type').value;
+      
+      // Đọc các giá trị trong form
+      const name = document.getElementById('form-name').value.trim();
+      const title = document.getElementById('form-title').value.trim();
+      const gender = document.getElementById('form-gender').value;
+      const generation = parseInt(document.getElementById('form-generation').value);
+      const role = document.getElementById('form-role').value.trim();
+      const origin = document.getElementById('form-origin').value.trim();
+      const birth = document.getElementById('form-birth').value.trim();
+      const death = document.getElementById('form-death').value.trim();
+      const notes = document.getElementById('form-notes').value.trim();
+
+      if (actionType === 'edit') {
+        // Cập nhật thành viên cũ
+        const node = familyData.find(n => n.id === nodeId);
+        if (node) {
+          node.name = name;
+          node.title = title;
+          node.gender = gender;
+          node.generation = generation;
+          node.role = role;
+          node.origin = origin;
+          node.birth = birth;
+          node.death = death;
+          node.notes = notes;
+
+          // Cập nhật danh sách vợ chồng từ Form Inputs
+          const spouseItems = document.querySelectorAll('.spouse-item-edit');
+          node.spouses = [];
+          spouseItems.forEach(item => {
+            const inputs = item.querySelectorAll('input');
+            node.spouses.push({
+              name: inputs[0].value.trim(),
+              birth: inputs[1].value.trim(),
+              death: inputs[2].value.trim(),
+              notes: ''
+            });
+          });
+        }
+      } else if (actionType === 'add_relative') {
+        // Thêm thành viên mới dựa vào quan hệ phả hệ
+        const activeNode = nodesMap[nodeId];
+        const relationType = document.getElementById('form-relation-type').value;
+        const newId = Date.now().toString();
+
+        if (relationType === 'spouse') {
+          // Quan hệ vợ/chồng: Không tạo nút độc lập mới trong cây chính, mà lồng trực tiếp vào node chủ thể
+          activeNode.spouses = activeNode.spouses || [];
+          activeNode.spouses.push({ name, birth, death, notes });
+        } else {
+          // Tạo một nút độc lập mới liên kết bằng parentId
+          const newNode = {
+            id: newId,
+            name,
+            title,
+            gender,
+            generation,
+            role,
+            origin,
+            birth,
+            death,
+            notes,
+            parentId: null,
+            spouses: []
+          };
+
+          if (relationType === 'child') {
+            newNode.parentId = activeNode.id;
+          } else if (relationType === 'sibling') {
+            newNode.parentId = activeNode.parentId;
+          } else if (relationType === 'parent') {
+            // Thiết lập nút mới làm cha mẹ
+            newNode.parentId = activeNode.parentId; // Cha mẹ của node mới chính là ông bà cũ
+            activeNode.parentId = newId;            // Đặt cha mẹ của node hiện tại là nút mới tạo
+
+            // Trường hợp chèn cha mẹ Thủy Tổ mới (trở thành đời 1):
+            // Ta phải nâng tất cả các nút hiện tại lên 1 đời để phả hệ khớp logic toán học
+            if (activeNode.parentId === newId && newNode.parentId === null) {
+              familyData.forEach(n => {
+                n.generation += 1;
+              });
+              newNode.generation = 1;
+            }
+          }
+
+          familyData.push(newNode);
+        }
+      }
+
+      saveData();
+      closeMemberModal();
+    }
+
+    // --- QUICK ADD CHILD FROM COLLAPSIBLE LIST ---
+    function quickAddChild(parentId, event) {
+      event.stopPropagation();
+      openMemberDetails(parentId);
+      startAddRelative('child');
+    }
+
+    // --- XÓA THÀNH VIÊN (DELETE LOGIC) ---
+    function handleDeleteMember() {
+      const id = window.activeMemberId;
+      const node = nodesMap[id];
+      if (!node) return;
+
+      // Bật modal xác nhận xóa
+      document.getElementById('delete-modal-question').innerText = `Bạn chắc chắn muốn xóa cụ "${node.name}" khỏi gia phả?`;
+      
+      const children = childrenMap[id] || [];
+      const optionsContainer = document.getElementById('delete-options-container');
+
+      if (children.length > 0) {
+        optionsContainer.classList.remove('hidden');
+      } else {
+        optionsContainer.classList.add('hidden'); // Không có con thì không cần chọn phương án
+      }
+
+      document.getElementById('delete-modal-backdrop').classList.add('open');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('delete-modal-backdrop').classList.remove('open');
+    }
+
+    function confirmDeleteMember() {
+      const id = window.activeMemberId;
+      const node = nodesMap[id];
+      if (!node) return;
+
+      const children = childrenMap[id] || [];
+      
+      if (children.length === 0) {
+        // Trường hợp không có con cháu, xóa đơn giản trực tiếp
+        familyData = familyData.filter(n => n.id !== id);
+      } else {
+        // Trường hợp có con cháu phụ thuộc
+        const strategy = document.querySelector('input[name="delete-strategy"]:checked').value;
+        
+        if (strategy === 'soft') {
+          // Phương án 1: Nối con lên ông bà (parentId của con = parentId của cha mẹ bị xóa)
+          children.forEach(child => {
+            child.parentId = node.parentId;
+          });
+          familyData = familyData.filter(n => n.id !== id);
+        } else if (strategy === 'hard') {
+          // Phương án 2: Xóa toàn bộ nhánh đệ quy
+          const idsToDelete = new Set();
+          
+          function collectDescendantIds(nodeId) {
+            idsToDelete.add(nodeId);
+            const childList = childrenMap[nodeId] || [];
+            childList.forEach(child => collectDescendantIds(child.id));
+          }
+          
+          collectDescendantIds(id);
+          familyData = familyData.filter(n => !idsToDelete.has(n.id));
+        }
+      }
+
+      saveData();
+      closeDeleteModal();
+      closeMemberModal();
+    }
+
+    // --- NHẬP & XUẤT FILE GIA PHẢ (IMPORT & EXPORT JSON) ---
+    function exportDataJSON() {
+      const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(familyData, null, 2))}`;
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", jsonString);
+      downloadAnchor.setAttribute("download", `giapha_nguyen_toc_${Date.now()}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    // Nhập File kích hoạt click ẩn
+    function triggerImport() {
+      document.getElementById('import-file-input').click();
+    }
+
+    function importDataJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (Array.isArray(imported) && imported.length > 0 && imported[0].id) {
+            familyData = imported;
+            saveData();
+            resetZoomAndPan();
+            alert("✅ Nhập file dữ liệu gia phả thành công!");
+          } else {
+            alert("❌ File JSON không đúng định dạng sơ đồ phả hệ mẫu.");
+          }
+        } catch (err) {
+          alert("❌ Không thể đọc nội dung file JSON. Hãy kiểm tra lại file của bạn.");
+        }
+      };
+      reader.readAsText(file);
+      // Reset input file để có thể chọn lại cùng 1 file
+      event.target.value = '';
+    }
+
+    // --- POP-UP HƯỚNG DẪN SỬ DỤNG (USER GUIDE POPUP) ---
+    function openGuideModal() {
+      document.getElementById('guide-modal-backdrop').classList.add('open');
+    }
+
+    function closeGuideModal() {
+      document.getElementById('guide-modal-backdrop').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
