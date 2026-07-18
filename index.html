@@ -2041,6 +2041,7 @@
 
       // Mở modal backdrop
       document.getElementById('member-modal-backdrop').classList.add('open');
+      updateLockEditingUI();
     }
 
     function closeMemberModal() {
@@ -2153,6 +2154,11 @@
         targetGen = activeNode.generation + 1;
       }
 
+      if (cloudConfig.editLocked && !isAdminLoggedIn) {
+        alert('Giao diện đang khóa chỉnh sửa. Vui lòng đăng nhập Admin để cập nhật.');
+        return;
+      }
+
       document.getElementById('member-modal-title').innerText = `Thêm ${relationText} của cụ ${activeNode.name}`;
       
       // Reset form trống để điền mới
@@ -2185,10 +2191,14 @@
     function handleFormSubmit(e) {
       e.preventDefault();
       
+      if (cloudConfig.editLocked && !isAdminLoggedIn) {
+        alert('Giao diện đang khóa chỉnh sửa. Vui lòng đăng nhập Admin để cập nhật.');
+        return;
+      }
+
       const nodeId = document.getElementById('form-node-id').value;
       const actionType = document.getElementById('form-action-type').value;
       
-      // Đọc các giá trị trong form
       const name = document.getElementById('form-name').value.trim();
       const title = document.getElementById('form-title').value.trim();
       const gender = document.getElementById('form-gender').value;
@@ -2200,83 +2210,83 @@
       const notes = document.getElementById('form-notes').value.trim();
 
       if (actionType === 'edit') {
-        // Cập nhật thành viên cũ
-        const node = familyData.find(n => n.id === nodeId);
-        if (node) {
-          node.name = name;
-          node.title = title;
-          node.gender = gender;
-          node.generation = generation;
-          node.role = role;
-          node.origin = origin;
-          node.birth = birth;
-          node.death = death;
-          node.notes = notes;
+        const changeFn = (data) => {
+          const node = data.find(n => n.id === nodeId);
+          if (node) {
+            node.name = name;
+            node.title = title;
+            node.gender = gender;
+            node.generation = generation;
+            node.role = role;
+            node.origin = origin;
+            node.birth = birth;
+            node.death = death;
+            node.notes = notes;
 
-          // Cập nhật danh sách vợ chồng từ Form Inputs
-          const spouseItems = document.querySelectorAll('.spouse-item-edit');
-          node.spouses = [];
-          spouseItems.forEach(item => {
-            const inputs = item.querySelectorAll('input');
-            node.spouses.push({
-              name: inputs[0].value.trim(),
-              birth: inputs[1].value.trim(),
-              death: inputs[2].value.trim(),
-              notes: ''
-            });
-          });
-        }
-      } else if (actionType === 'add_relative') {
-        // Thêm thành viên mới dựa vào quan hệ phả hệ
-        const activeNode = nodesMap[nodeId];
-        const relationType = document.getElementById('form-relation-type').value;
-        const newId = Date.now().toString();
-
-        if (relationType === 'spouse') {
-          // Quan hệ vợ/chồng: Không tạo nút độc lập mới trong cây chính, mà lồng trực tiếp vào node chủ thể
-          activeNode.spouses = activeNode.spouses || [];
-          activeNode.spouses.push({ name, birth, death, notes });
-        } else {
-          // Tạo một nút độc lập mới liên kết bằng parentId
-          const newNode = {
-            id: newId,
-            name,
-            title,
-            gender,
-            generation,
-            role,
-            origin,
-            birth,
-            death,
-            notes,
-            parentId: null,
-            spouses: []
-          };
-
-          if (relationType === 'child') {
-            newNode.parentId = activeNode.id;
-          } else if (relationType === 'sibling') {
-            newNode.parentId = activeNode.parentId;
-          } else if (relationType === 'parent') {
-            // Thiết lập nút mới làm cha mẹ
-            newNode.parentId = activeNode.parentId; // Cha mẹ của node mới chính là ông bà cũ
-            activeNode.parentId = newId;            // Đặt cha mẹ của node hiện tại là nút mới tạo
-
-            // Trường hợp chèn cha mẹ Thủy Tổ mới (trở thành đời 1):
-            // Ta phải nâng tất cả các nút hiện tại lên 1 đời để phả hệ khớp logic toán học
-            if (activeNode.parentId === newId && newNode.parentId === null) {
-              familyData.forEach(n => {
-                n.generation += 1;
+            const spouseItems = document.querySelectorAll('.spouse-item-edit');
+            node.spouses = [];
+            spouseItems.forEach(item => {
+              const inputs = item.querySelectorAll('input');
+              node.spouses.push({
+                name: inputs[0].value.trim(),
+                birth: inputs[1].value.trim(),
+                death: inputs[2].value.trim(),
+                notes: ''
               });
-              newNode.generation = 1;
-            }
+            });
           }
+          return data;
+        };
+        updateFamilyTreeData(`Cập nhật thông tin thành viên: ${name}`, changeFn);
+      } else if (actionType === 'add_relative') {
+        const relationType = document.getElementById('form-relation-type').value;
+        const changeFn = (data) => {
+          const activeNode = data.find(n => n.id === nodeId);
+          if (relationType === 'spouse') {
+            if (activeNode) {
+              activeNode.spouses = activeNode.spouses || [];
+              activeNode.spouses.push({ name, birth, death, notes });
+            }
+          } else {
+            const newId = Date.now().toString();
+            const newNode = {
+              id: newId,
+              name,
+              title,
+              gender,
+              generation,
+              role,
+              origin,
+              birth,
+              death,
+              notes,
+              parentId: null,
+              spouses: []
+            };
 
-          familyData.push(newNode);
-        }
+            if (relationType === 'child') {
+              newNode.parentId = activeNode.id;
+            } else if (relationType === 'sibling') {
+              newNode.parentId = activeNode.parentId;
+            } else if (relationType === 'parent') {
+              newNode.parentId = activeNode.parentId;
+              activeNode.parentId = newId;
+
+              if (activeNode.parentId === newId && newNode.parentId === null) {
+                data.forEach(n => {
+                  n.generation += 1;
+                });
+                newNode.generation = 1;
+              }
+            }
+            data.push(newNode);
+          }
+          return data;
+        };
+        const relLabels = { parent: 'Cha/Mẹ', spouse: 'Vợ/Chồng', sibling: 'Anh/Chị/Em', child: 'Con' };
+        updateFamilyTreeData(`Thêm người thân (${relLabels[relationType]}): ${name} cho cụ ${nodesMap[nodeId] ? nodesMap[nodeId].name : ''}`, changeFn);
       }
 
-      saveData();
       closeMemberModal();
     }
 
@@ -2313,84 +2323,293 @@
     }
 
     function confirmDeleteMember() {
+      if (cloudConfig.editLocked && !isAdminLoggedIn) {
+        alert('Giao diện đang khóa chỉnh sửa. Vui lòng đăng nhập Admin để cập nhật.');
+        return;
+      }
+
       const id = window.activeMemberId;
       const node = nodesMap[id];
       if (!node) return;
 
-      const children = childrenMap[id] || [];
-      
-      if (children.length === 0) {
-        // Trường hợp không có con cháu, xóa đơn giản trực tiếp
-        familyData = familyData.filter(n => n.id !== id);
-      } else {
-        // Trường hợp có con cháu phụ thuộc
-        const strategy = document.querySelector('input[name="delete-strategy"]:checked').value;
+      const changeFn = (data) => {
+        const targetNode = data.find(n => n.id === id);
+        if (!targetNode) return data;
+        const targetChildren = data.filter(n => n.parentId === id);
         
-        if (strategy === 'soft') {
-          // Phương án 1: Nối con lên ông bà (parentId của con = parentId của cha mẹ bị xóa)
-          children.forEach(child => {
-            child.parentId = node.parentId;
-          });
-          familyData = familyData.filter(n => n.id !== id);
-        } else if (strategy === 'hard') {
-          // Phương án 2: Xóa toàn bộ nhánh đệ quy
-          const idsToDelete = new Set();
+        if (targetChildren.length === 0) {
+          return data.filter(n => n.id !== id);
+        } else {
+          const strategy = document.querySelector('input[name="delete-strategy"]:checked').value;
           
-          function collectDescendantIds(nodeId) {
-            idsToDelete.add(nodeId);
-            const childList = childrenMap[nodeId] || [];
-            childList.forEach(child => collectDescendantIds(child.id));
+          if (strategy === 'soft') {
+            targetChildren.forEach(child => {
+              child.parentId = targetNode.parentId;
+            });
+            return data.filter(n => n.id !== id);
+          } else if (strategy === 'hard') {
+            const idsToDelete = new Set();
+            
+            function collectDescendantIds(nodeId) {
+              idsToDelete.add(nodeId);
+              const childList = data.filter(n => n.parentId === nodeId);
+              childList.forEach(child => collectDescendantIds(child.id));
+            }
+            
+            collectDescendantIds(id);
+            return data.filter(n => !idsToDelete.has(n.id));
           }
-          
-          collectDescendantIds(id);
-          familyData = familyData.filter(n => !idsToDelete.has(n.id));
         }
-      }
+        return data;
+      };
 
-      saveData();
+      updateFamilyTreeData(`Xóa thành viên: ${node.name}`, changeFn);
       closeDeleteModal();
       closeMemberModal();
     }
 
-    // --- NHẬP & XUẤT FILE GIA PHẢ (IMPORT & EXPORT JSON) ---
-    function exportDataJSON() {
-      const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(familyData, null, 2))}`;
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", jsonString);
-      downloadAnchor.setAttribute("download", `giapha_nguyen_toc_${Date.now()}.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
+    // --- CÁC HÀM TIỆN ÍCH DÀNH CHO ADMIN ---
+    function openAdminModal() {
+      if (isAdminLoggedIn) {
+        document.getElementById('admin-login-box').classList.add('hidden');
+        document.getElementById('admin-control-box').classList.remove('hidden');
+        
+        document.getElementById('admin-lock-edit-toggle').checked = cloudConfig.editLocked;
+        document.getElementById('admin-sync-mode').value = cloudConfig.mode;
+        document.getElementById('admin-sync-provider').value = cloudConfig.provider;
+        document.getElementById('admin-kvdb-bucket').value = cloudConfig.kvdbBucket;
+        document.getElementById('admin-firebase-url').value = cloudConfig.firebaseUrl;
+
+        toggleSyncModeUI(cloudConfig.mode);
+        toggleProviderUI(cloudConfig.provider);
+        renderBackupHistory();
+      } else {
+        document.getElementById('admin-login-box').classList.remove('hidden');
+        document.getElementById('admin-control-box').classList.add('hidden');
+      }
+      document.getElementById('admin-modal-backdrop').classList.add('open');
     }
 
-    // Nhập File kích hoạt click ẩn
-    function triggerImport() {
-      document.getElementById('import-file-input').click();
+    function closeAdminModal() {
+      document.getElementById('admin-modal-backdrop').classList.remove('open');
     }
 
-    function importDataJSON(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const pwd = document.getElementById('admin-password-input').value.trim();
+      
+      if (pwd === cloudConfig.adminPassword) {
+        isAdminLoggedIn = true;
+        sessionStorage.setItem('giapha_admin_session', 'active');
+        document.getElementById('admin-password-input').value = '';
+        
+        openAdminModal();
+        updateAdminButtonUI();
+        updateLockEditingUI();
+      } else {
+        alert('❌ Sai mật khẩu quản trị viên!');
+      }
+    }
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const imported = JSON.parse(e.target.result);
-          if (Array.isArray(imported) && imported.length > 0 && imported[0].id) {
-            familyData = imported;
-            saveData();
-            resetZoomAndPan();
-            alert("✅ Nhập file dữ liệu gia phả thành công!");
-          } else {
-            alert("❌ File JSON không đúng định dạng sơ đồ phả hệ mẫu.");
-          }
-        } catch (err) {
-          alert("❌ Không thể đọc nội dung file JSON. Hãy kiểm tra lại file của bạn.");
+    function handleAdminLogout() {
+      isAdminLoggedIn = false;
+      sessionStorage.removeItem('giapha_admin_session');
+      updateAdminButtonUI();
+      updateLockEditingUI();
+      closeAdminModal();
+    }
+
+    function updateAdminButtonUI() {
+      const btn = document.getElementById('admin-action-btn');
+      if (btn) {
+        if (isAdminLoggedIn) {
+          btn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Cấu Hình Admin
+          `;
+          btn.className = "btn-primary";
+        } else {
+          btn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Đăng Nhập Admin
+          `;
+          btn.className = "btn-secondary";
         }
-      };
-      reader.readAsText(file);
-      // Reset input file để có thể chọn lại cùng 1 file
-      event.target.value = '';
+      }
+    }
+
+    function switchAdminTab(tabName) {
+      document.getElementById('admin-tab-settings').classList.toggle('hidden', tabName !== 'settings');
+      document.getElementById('admin-tab-history').classList.toggle('hidden', tabName !== 'history');
+      
+      document.getElementById('tab-settings-btn').classList.toggle('active', tabName === 'settings');
+      document.getElementById('tab-history-btn').classList.toggle('active', tabName === 'history');
+    }
+
+    function toggleSyncModeUI(mode) {
+      const box = document.getElementById('cloud-provider-config-box');
+      if (box) box.style.display = mode === 'cloud' ? 'block' : 'none';
+    }
+
+    function toggleProviderUI(provider) {
+      document.getElementById('kvdb-config-box').classList.toggle('hidden', provider !== 'kvdb');
+      document.getElementById('firebase-config-box').classList.toggle('hidden', provider !== 'firebase');
+    }
+
+    function changeAdminPassword() {
+      const newPwd = document.getElementById('admin-new-password').value.trim();
+      if (!newPwd) {
+        alert('Mật khẩu không được để trống!');
+        return;
+      }
+      cloudConfig.adminPassword = newPwd;
+      document.getElementById('admin-new-password').value = '';
+      saveMetadataToCloud();
+      alert('✅ Đã cập nhật mật khẩu Admin mới!');
+    }
+
+    function toggleLockEditing(isLocked) {
+      cloudConfig.editLocked = isLocked;
+      saveMetadataToCloud();
+    }
+
+    async function saveMetadataToCloud() {
+      if (cloudConfig.mode === 'local') {
+        localStorage.setItem('giapha_cloud_config', JSON.stringify(cloudConfig));
+        updateLockEditingUI();
+        return;
+      }
+      showLoading('Đang đồng bộ cài đặt lên đám mây...');
+      try {
+        let payload = await fetchFromCloud();
+        if (!payload) {
+          payload = {
+            metadata: {
+              adminPassword: cloudConfig.adminPassword,
+              editLocked: cloudConfig.editLocked
+            },
+            familyData: [...familyData],
+            backups: []
+          };
+        }
+        payload.metadata.adminPassword = cloudConfig.adminPassword;
+        payload.metadata.editLocked = cloudConfig.editLocked;
+        await saveToCloud(payload);
+        localStorage.setItem('giapha_cloud_config', JSON.stringify(cloudConfig));
+      } catch (e) {
+        console.error(e);
+        alert('Không thể lưu cài đặt lên đám mây: ' + e.message);
+      } finally {
+        hideLoading();
+        updateLockEditingUI();
+      }
+    }
+
+    function saveSyncSettings() {
+      const mode = document.getElementById('admin-sync-mode').value;
+      const provider = document.getElementById('admin-sync-provider').value;
+      const kvdbBucket = document.getElementById('admin-kvdb-bucket').value.trim();
+      const firebaseUrl = document.getElementById('admin-firebase-url').value.trim();
+
+      if (mode === 'cloud') {
+        if (provider === 'kvdb' && !kvdbBucket) {
+          alert('Vui lòng điền Bucket ID!');
+          return;
+        }
+        if (provider === 'firebase' && !firebaseUrl) {
+          alert('Vui lòng điền REST URL!');
+          return;
+        }
+      }
+
+      cloudConfig.mode = mode;
+      cloudConfig.provider = provider;
+      cloudConfig.kvdbBucket = kvdbBucket;
+      cloudConfig.firebaseUrl = firebaseUrl;
+
+      localStorage.setItem('giapha_cloud_config', JSON.stringify(cloudConfig));
+      closeAdminModal();
+      loadData();
+      alert('✅ Cấu hình đồng bộ mới đã được áp dụng!');
+    }
+
+    function triggerAdminReset() {
+      if (!isAdminLoggedIn) return;
+      if (confirm("⚠️ BẠN CÓ CHẮC CHẮN MUỐN KHỞI TẠO LẠI PHẢ HỆ VỀ TRẠNG THÁI MẪU 3 ĐỜI BAN ĐẦU? Hành động này sẽ ghi đè toàn bộ dữ liệu hiện tại, tuy nhiên một bản sao lưu hiện tại sẽ được lưu vào lịch sử để phòng ngừa.")) {
+        const changeFn = (data) => {
+          return JSON.parse(JSON.stringify(defaultFamilyData));
+        };
+        updateFamilyTreeData("Khởi tạo lại sơ đồ về trạng thái mẫu 3 đời", changeFn);
+        closeAdminModal();
+      }
+    }
+
+    function renderBackupHistory() {
+      const tbody = document.getElementById('backup-history-list-tbody');
+      tbody.innerHTML = '';
+      
+      if (!backups || backups.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" style="padding: 15px; text-align: center; color: var(--text-light);">Chưa có bản sao lưu nào được lưu lại.</td></tr>`;
+        return;
+      }
+
+      backups.forEach((b, idx) => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid #d5c3a6';
+        
+        const date = new Date(b.timestamp);
+        const dateStr = date.toLocaleString('vi-VN', { 
+          hour: '2-digit', 
+          minute: '2-digit', 
+          second: '2-digit', 
+          day: '2-digit', 
+          month: '2-digit', 
+          year: 'numeric' 
+        });
+
+        tr.innerHTML = `
+          <td style="padding: 8px; font-weight: 500;">${dateStr}</td>
+          <td style="padding: 8px; color: var(--text-light);">${b.action || 'Không có mô tả'}</td>
+          <td style="padding: 8px; text-align: center;">
+            <button class="list-btn" onclick="restoreBackup(${idx})" style="padding: 3px 8px; font-size:11px; background:#fff; border-color: var(--secondary-color); color: var(--secondary-color);">Khôi phục</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function restoreBackup(idx) {
+      if (!isAdminLoggedIn) return;
+      const b = backups[idx];
+      if (!b) return;
+
+      const date = new Date(b.timestamp).toLocaleString('vi-VN');
+      if (confirm(`Bạn có chắc chắn muốn khôi phục phả hệ về bản sao lưu tại lúc: ${date}?\nBản phả hệ hiện tại sẽ được lưu lại thành một bản sao lưu mới.`)) {
+        const changeFn = (data) => {
+          return JSON.parse(JSON.stringify(b.data));
+        };
+        await updateFamilyTreeData(`Khôi phục về bản sao lưu ngày ${date}`, changeFn);
+        alert('✅ Đã khôi phục phả hệ thành công!');
+        renderBackupHistory();
+      }
+    }
+
+    function updateLockEditingUI() {
+      const isEditable = !cloudConfig.editLocked || isAdminLoggedIn;
+      
+      // Ẩn/Hiện các nút thêm/sửa trên trang chính và List view
+      document.querySelectorAll('.list-actions').forEach(el => {
+        el.style.display = isEditable ? 'flex' : 'none';
+      });
+
+      // Cập nhật các nút bên trong Modal chi tiết thành viên
+      const editBtn = document.querySelector('button[onclick="switchToEditMode()"]');
+      const addRelBtn = document.querySelector('button[onclick="openAddRelativeDropdown()"]');
+      const addRelBox = document.getElementById('add-relative-actions-box');
+      
+      if (editBtn) editBtn.style.display = isEditable ? 'inline-flex' : 'none';
+      if (addRelBtn) addRelBtn.style.display = isEditable ? 'inline-flex' : 'none';
+      if (!isEditable && addRelBox) addRelBox.classList.add('hidden');
     }
 
     // --- POP-UP HƯỚNG DẪN SỬ DỤNG (USER GUIDE POPUP) ---
